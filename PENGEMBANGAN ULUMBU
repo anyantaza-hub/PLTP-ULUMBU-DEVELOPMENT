@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLTP Ulumbu – PFD v4</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;700&family=Barlow:wght@400;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#d8dfe8;font-family:'Barlow',sans-serif;color:#1a1a2e;}
+.page{max-width:3600px;margin:0 auto;padding:14px 18px 24px;}
+.hdr{display:flex;align-items:flex-start;justify-content:space-between;
+  background:#0e1c38;color:#fff;border-radius:8px 8px 0 0;padding:20px 30px;gap:20px;}
+.hdr-title{font-family:'Rajdhani',sans-serif;font-size:30px;font-weight:700;
+  color:#6fc8ff;letter-spacing:2px;}
+.hdr-sub{font-size:15px;color:#8aaac8;letter-spacing:1px;margin-top:5px;}
+.docbox{border:1px solid #3a78bb;padding:6px 16px;
+  font-family:'Share Tech Mono',monospace;font-size:14px;color:#6fc8ff;white-space:nowrap;}
+.hdr-meta{font-family:'Share Tech Mono',monospace;font-size:13px;color:#8aaac8;
+  line-height:1.9;text-align:right;}
+.toolbar{background:#e2e8f0;border:1px solid #b8c4d4;border-top:none;
+  display:flex;align-items:center;gap:12px;padding:10px 20px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 22px;
+  font-family:'Share Tech Mono',monospace;font-size:14px;border-radius:4px;
+  border:1px solid;cursor:pointer;transition:all .18s;white-space:nowrap;font-weight:bold;}
+.btn-png{background:#1a3a6e;color:#fff;border-color:#1a3a6e;}
+.btn-png:hover{background:#254a88;}
+.btn-pdf{background:#8b1a1a;color:#fff;border-color:#8b1a1a;}
+.btn-pdf:hover{background:#aa2222;}
+.btn-svg{background:#1a5c2a;color:#fff;border-color:#1a5c2a;}
+.btn-svg:hover{background:#226e33;}
+#dl-st{font-size:13px;font-family:'Share Tech Mono',monospace;color:#1a6e3a;display:none;padding:4px 8px;}
+.cw{overflow-x:auto;border:1px solid #b8c4d4;border-top:none;background:#c8d0dc;}
+#dc{background:#fff;display:block;}
+.leg{display:flex;flex-wrap:wrap;gap:18px;padding:12px 22px;
+  border:1px solid #b8c4d4;border-top:none;background:#f5f7fb;align-items:center;}
+.lg{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.ls{width:1px;height:30px;background:#b8c4d4;}
+.li{display:flex;align-items:center;gap:8px;font-size:13px;color:#4a5568;
+  font-family:'Share Tech Mono',monospace;}
+.lr{width:26px;height:16px;border:2px solid;border-radius:2px;}
+.ll{width:36px;height:4px;border-radius:2px;}
+.lt{font-family:'Rajdhani',sans-serif;font-size:16px;color:#1a3a6e;font-weight:700;letter-spacing:1px;}
+.ftr{display:flex;justify-content:space-between;padding:8px 2px 0;
+  font-family:'Share Tech Mono',monospace;font-size:11px;color:#7888aa;flex-wrap:wrap;gap:4px;}
+#tip{position:fixed;background:#0e1c38;border:1px solid #3a78bb;border-radius:6px;
+  padding:12px 18px;font-size:14px;color:#cce8ff;pointer-events:none;display:none;
+  z-index:9999;max-width:340px;line-height:1.8;box-shadow:0 4px 16px rgba(0,0,0,.4);}
+#tip strong{color:#6fc8ff;display:block;margin-bottom:5px;font-family:'Share Tech Mono',monospace;font-size:13px;}
+@keyframes fR{to{stroke-dashoffset:-40}}
+@keyframes fD{to{stroke-dashoffset:-40}}
+.sf{stroke-dasharray:14 6;animation:fD 1.1s linear infinite;}
+.sfr{stroke-dasharray:12 6;animation:fR 1.3s linear infinite;}
+.bf{stroke-dasharray:10 6;animation:fD 1.7s linear infinite;}
+.ef{stroke-dasharray:6 5;animation:fD .9s linear infinite;}
+.of{stroke-dasharray:10 6;animation:fR 1.4s linear infinite;}
+.xf{stroke-dasharray:12 6;animation:fD 1.2s linear infinite;}
+.exporting .sf,.exporting .sfr,.exporting .bf,.exporting .ef,.exporting .of,.exporting .xf{animation:none!important;}
+</style>
+</head>
+<body>
+<div id="tip"></div>
+<div class="page">
+
+<div class="hdr">
+  <div>
+    <div class="hdr-title">PLTP ULUMBU — GEOTHERMAL DEVELOPMENT CONCEPT — GEOMODO ENERGY 2026</div>
+    <div class="hdr-sub">PROCESS FLOW DIAGRAM (PFD) · GATHERING SYSTEM &amp; POWER PLANT · CONCEPTUAL ENGINEERING</div>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+    <div class="docbox">ULB-PFD-001-REV.D</div>
+    <div class="hdr-meta">
+      Manggarai Regency, Flores – NTT, Indonesia<br>
+      Coord: 8°36′S, 120°29′E · ±1200 m asl<br>
+      Capstone Design Project 2026
+    </div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <span class="lt">⬇ EXPORT</span>
+  <button class="btn btn-png" onclick="dlPNG()">📷 Download PNG (Full Res)</button>
+  <button class="btn btn-pdf" onclick="dlPDF()">📄 Download PDF A3</button>
+  <button class="btn btn-svg" onclick="dlSVG()">🖼 Download SVG</button>
+  <span id="dl-st"></span>
+</div>
+
+<div class="cw">
+<!-- SVG viewBox: 3600 x 1490 — trimmed to content, no blank bottom -->
+<svg id="dc" viewBox="0 0 3600 1490"
+     xmlns="http://www.w3.org/2000/svg"
+     style="width:3600px;height:1490px;font-family:'Share Tech Mono',monospace;">
+<defs>
+  <marker id="as" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <path d="M1,1 L9,5 L1,9" fill="none" stroke="#cc2200" stroke-width="2"/>
+  </marker>
+  <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <path d="M1,1 L9,5 L1,9" fill="none" stroke="#7a3a0a" stroke-width="2"/>
+  </marker>
+  <marker id="ae" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <path d="M1,1 L9,5 L1,9" fill="none" stroke="#1a1a88" stroke-width="2"/>
+  </marker>
+  <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <path d="M1,1 L9,5 L1,9" fill="none" stroke="#1a5fc4" stroke-width="2"/>
+  </marker>
+  <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <path d="M1,1 L9,5 L1,9" fill="none" stroke="#1a7a2a" stroke-width="2"/>
+  </marker>
+  <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <path d="M1,1 L9,5 L1,9" fill="none" stroke="#0044aa" stroke-width="2"/>
+  </marker>
+  <linearGradient id="gv" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#b8c4d8"/><stop offset="100%" stop-color="#7888a0"/>
+  </linearGradient>
+  <linearGradient id="gt" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#ccd4e8"/><stop offset="100%" stop-color="#8c94a8"/>
+  </linearGradient>
+  <linearGradient id="gg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#ffe890"/><stop offset="100%" stop-color="#c89020"/>
+  </linearGradient>
+  <linearGradient id="gtr" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#c8e4c8"/><stop offset="100%" stop-color="#88b488"/>
+  </linearGradient>
+  <linearGradient id="gorc" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#c0d8f8"/><stop offset="100%" stop-color="#88aad8"/>
+  </linearGradient>
+  <linearGradient id="gcap" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#9898b0"/><stop offset="100%" stop-color="#686888"/>
+  </linearGradient>
+  <pattern id="hx" patternUnits="userSpaceOnUse" width="14" height="14" patternTransform="rotate(45)">
+    <rect width="14" height="14" fill="#fffaee"/>
+    <line x1="0" y1="0" x2="0" y2="14" stroke="#e8c840" stroke-width="2" opacity="0.4"/>
+  </pattern>
+  <pattern id="ho" patternUnits="userSpaceOnUse" width="14" height="14" patternTransform="rotate(45)">
+    <rect width="14" height="14" fill="#eaf4ff"/>
+    <line x1="0" y1="0" x2="0" y2="14" stroke="#6aace8" stroke-width="2" opacity="0.4"/>
+  </pattern>
+  <pattern id="he" patternUnits="userSpaceOnUse" width="14" height="14" patternTransform="rotate(45)">
+    <rect width="14" height="14" fill="#ecfaec"/>
+    <line x1="0" y1="0" x2="0" y2="14" stroke="#6aca6a" stroke-width="2" opacity="0.4"/>
+  </pattern>
+  <pattern id="hf" patternUnits="userSpaceOnUse" width="20" height="20">
+    <rect width="20" height="20" fill="#d8e8d0"/>
+    <line x1="0" y1="0" x2="10" y2="20" stroke="#8aaa88" stroke-width="1.2"/>
+    <line x1="10" y1="0" x2="20" y2="20" stroke="#8aaa88" stroke-width="1.2"/>
+  </pattern>
+</defs>
+
+<rect width="3600" height="1490" fill="#f4f6fa"/>
+<g stroke="#dde4ee" stroke-width="0.8" opacity="0.5">
+  <line x1="0" y1="200" x2="3600" y2="200"/>
+  <line x1="0" y1="400" x2="3600" y2="400"/>
+  <line x1="0" y1="600" x2="3600" y2="600"/>
+  <line x1="0" y1="800" x2="3600" y2="800"/>
+  <line x1="0" y1="1000" x2="3600" y2="1000"/>
+  <line x1="0" y1="1200" x2="3600" y2="1200"/>
+  <line x1="0" y1="1400" x2="3600" y2="1400"/>
+  <line x1="300" y1="0" x2="300" y2="1490"/>
+  <line x1="600" y1="0" x2="600" y2="1490"/>
+  <line x1="900" y1="0" x2="900" y2="1490"/>
+  <line x1="1200" y1="0" x2="1200" y2="1490"/>
+  <line x1="1500" y1="0" x2="1500" y2="1490"/>
+  <line x1="1800" y1="0" x2="1800" y2="1490"/>
+  <line x1="2100" y1="0" x2="2100" y2="1490"/>
+  <line x1="2400" y1="0" x2="2400" y2="1490"/>
+  <line x1="2700" y1="0" x2="2700" y2="1490"/>
+  <line x1="3000" y1="0" x2="3000" y2="1490"/>
+  <line x1="3300" y1="0" x2="3300" y2="1490"/>
+</g>
+
+<!-- ZONE BOXES -->
+<rect x="20" y="50" width="1100" height="1160" rx="10" fill="url(#hx)" stroke="#c9a000" stroke-width="3" stroke-dasharray="14 6" opacity="0.85"/>
+<text x="30" y="88" font-family="'Rajdhani',sans-serif" font-size="24" font-weight="700" fill="#a07800" letter-spacing="2">▶ EXISTING — CONDENSING UNITS [2×2.5 MW]</text>
+<rect x="1130" y="50" width="860" height="1160" rx="10" fill="url(#ho)" stroke="#1a5fc4" stroke-width="3" stroke-dasharray="14 6" opacity="0.85"/>
+<text x="1144" y="88" font-family="'Rajdhani',sans-serif" font-size="24" font-weight="700" fill="#1a5fc4" letter-spacing="2">▶ BACK PRESSURE UNITS + DI-SSE [2×2.5 + 3,75 MW]</text>
+<rect x="2000" y="50" width="1580" height="1160" rx="10" fill="url(#he)" stroke="#1a7a2a" stroke-width="3" stroke-dasharray="14 6" opacity="0.85"/>
+<text x="2014" y="88" font-family="'Rajdhani',sans-serif" font-size="24" font-weight="700" fill="#1a7a2a" letter-spacing="2">▶ FIELD EXPANSION [2×10 MW]</text>
+
+<!-- MAIN STEAM HEADER -->
+<line x1="420" y1="640" x2="1620" y2="640" stroke="#cc2200" stroke-width="5" class="sfr"/>
+<rect x="680" y="614" width="420" height="26" rx="5" fill="#fff8f0"/>
+<text x="890" y="633" text-anchor="middle" font-size="30" font-weight="bold" fill="#cc2200">━━ MAIN STEAM HEADER ━━</text>
+
+<!-- GEOLOGICAL SECTION -->
+<line x1="20" y1="1210" x2="3580" y2="1210" stroke="#3a6a3a" stroke-width="4"/>
+<rect x="22" y="1192" width="400" height="20" rx="3" fill="#e8f0e8"/>
+<text x="30" y="1208" font-size="15" fill="#3a6a3a" font-weight="600">GROUND SURFACE ≈ 1200 m asl</text>
+<rect x="20" y="1212" width="3560" height="80" rx="0" fill="url(#gcap)" opacity="0.9"/>
+<text x="1800" y="1262" text-anchor="middle" font-size="20" font-weight="700" fill="#f0f0ff" letter-spacing="4">CAP ROCK</text>
+<rect x="20" y="1292" width="3560" height="80" rx="0" fill="url(#hf)" opacity="0.95"/>
+<g stroke="#5a8855" stroke-width="1.5" opacity="0.7">
+  <line x1="100" y1="1292" x2="130" y2="1372"/><line x1="260" y1="1292" x2="230" y2="1372"/>
+  <line x1="450" y1="1292" x2="480" y2="1372"/><line x1="650" y1="1292" x2="620" y2="1372"/>
+  <line x1="860" y1="1292" x2="890" y2="1372"/><line x1="1080" y1="1292" x2="1050" y2="1372"/>
+  <line x1="1280" y1="1292" x2="1310" y2="1372"/><line x1="1500" y1="1292" x2="1470" y2="1372"/>
+  <line x1="1700" y1="1292" x2="1730" y2="1372"/><line x1="1920" y1="1292" x2="1890" y2="1372"/>
+  <line x1="2120" y1="1292" x2="2150" y2="1372"/><line x1="2340" y1="1292" x2="2310" y2="1372"/>
+  <line x1="2540" y1="1292" x2="2570" y2="1372"/><line x1="2760" y1="1292" x2="2730" y2="1372"/>
+  <line x1="2960" y1="1292" x2="2990" y2="1372"/><line x1="3180" y1="1292" x2="3150" y2="1372"/>
+  <line x1="3380" y1="1292" x2="3410" y2="1372"/>
+</g>
+<rect x="20" y="1372" width="3560" height="100" rx="0" fill="#aa2200" opacity="0.35"/>
+<text x="1800" y="1435" text-anchor="middle" font-size="18" font-weight="700" fill="#550000" letter-spacing="3">HOT GEOTHERMAL RESERVOIR — T ≈ 260°C | P ≈ 32 bar</text>
+<g fill="#cc2200" opacity="0.3">
+  <circle cx="300" cy="1350" r="6"/><circle cx="310" cy="1330" r="5"/>
+  <circle cx="1600" cy="1350" r="6"/><circle cx="1592" cy="1330" r="5"/>
+  <circle cx="2900" cy="1350" r="6"/><circle cx="2910" cy="1330" r="5"/>
+</g>
+
+<!-- PRODUCTION WELL ULB-02 -->
+<rect x="286" y="1212" width="28" height="160" fill="#8898a8"/>
+<rect x="290" y="1212" width="20" height="160" fill="#aabbc8"/>
+<rect x="290" y="1360" width="20" height="100" fill="#c87040" opacity="0.9"/>
+<rect x="272" y="1190" width="56" height="28" rx="5" fill="#8898a8" stroke="#445566" stroke-width="2.5"/>
+<rect x="280" y="1166" width="40" height="28" rx="4" fill="#778899" stroke="#445566" stroke-width="2.5"/>
+<line x1="300" y1="1166" x2="300" y2="1120" stroke="#556677" stroke-width="7"/>
+<line x1="272" y1="1145" x2="328" y2="1145" stroke="#556677" stroke-width="4"/>
+<line x1="278" y1="1132" x2="322" y2="1132" stroke="#556677" stroke-width="3"/>
+<circle cx="272" cy="1145" r="10" fill="#e8a020" stroke="#aa6000" stroke-width="2.5"/>
+<circle cx="328" cy="1145" r="10" fill="#e8a020" stroke="#aa6000" stroke-width="2.5"/>
+<rect x="250" y="1090" width="100" height="30" rx="4" fill="#fffaea" stroke="#c9a000" stroke-width="1.5"/>
+<text x="300" y="1113" text-anchor="middle" font-size="30" font-weight="bold" fill="#886600">ULB-02</text>
+<line x1="300" y1="1120" x2="300" y2="1020" stroke="#cc2200" stroke-width="4" class="sf"/>
+<circle cx="300" cy="1020" r="7" fill="#cc2200"/>
+<line x1="300" y1="1020" x2="150" y2="1020" stroke="#cc2200" stroke-width="4" class="sf"/>
+<line x1="150" y1="1020" x2="150" y2="930" stroke="#cc2200" stroke-width="4" class="sf"/>
+
+<!-- ROCK MUFFLER RM-101 -->
+<rect x="110" y="720" width="80" height="210" rx="18" fill="#9aa3ad" stroke="#445566" stroke-width="3"/>
+<ellipse cx="150" cy="720" rx="40" ry="14" fill="#b8c0c8" stroke="#445566" stroke-width="2.5"/>
+<circle cx="132" cy="788" r="9" fill="#666"/><circle cx="160" cy="802" r="10" fill="#777"/>
+<circle cx="175" cy="830" r="9" fill="#666"/><circle cx="135" cy="848" r="10" fill="#555"/>
+<circle cx="162" cy="872" r="9" fill="#666"/><circle cx="140" cy="895" r="10" fill="#777"/>
+<rect x="70" y="960" width="160" height="32" rx="4" fill="#fffaea" stroke="#c9a000" stroke-width="1"/>
+<rect x="115" y="790" width="72" height="34" rx="3" fill="rgba(255,255,255,.9)"/>
+<text x="150" y="820" text-anchor="middle" font-size="30" font-weight="bold" fill="#334455">RM</text>
+<text x="150" y="985" text-anchor="middle" font-size="23" fill="#aa8800">ROCK MUFFLER</text>
+<line x1="300" y1="1020" x2="300" y2="870" stroke="#cc2200" stroke-width="4" class="sf"/>
+
+<!-- SEPARATOR V-101 -->
+<rect x="254" y="700" width="92" height="170" rx="18" fill="url(#gv)" stroke="#445566" stroke-width="3"/>
+<ellipse cx="300" cy="700" rx="46" ry="16" fill="#a0aac0" stroke="#445566" stroke-width="2.5"/>
+<polygon points="254,870 272,904 328,904 346,870" fill="#909aaa" stroke="#445566" stroke-width="2"/>
+<path d="M300 720 Q278 745 300 762 Q322 778 300 795" fill="none" stroke="rgba(80,100,160,.3)" stroke-width="3.5"/>
+<rect x="264" y="765" width="72" height="38" rx="3" fill="rgba(255,255,255,.9)"/>
+<text x="300" y="796" text-anchor="middle" font-size="30" font-weight="bold" fill="#334455">SEP</text>
+<line x1="300" y1="700" x2="300" y2="660" stroke="#cc2200" stroke-width="4" class="sf"/>
+
+<!-- SCRUBBER SCB-101 -->
+<rect x="268" y="590" width="64" height="70" rx="12" fill="url(#gv)" stroke="#445566" stroke-width="2.5"/>
+<ellipse cx="300" cy="590" rx="32" ry="10" fill="#b0b8c8" stroke="#445566" stroke-width="2"/>
+<rect x="274" y="620" width="52" height="30" rx="3" fill="rgba(255,255,255,.88)"/>
+<text x="300" y="640" text-anchor="middle" font-size="25" font-weight="bold" fill="#334455">SCB</text>
+<line x1="300" y1="590" x2="300" y2="554" stroke="#cc2200" stroke-width="4" class="sf"/>
+
+<!-- DEMISTER DEM-101 -->
+<rect x="268" y="480" width="64" height="74" rx="12" fill="url(#gv)" stroke="#445566" stroke-width="2.5"/>
+<ellipse cx="300" cy="480" rx="32" ry="10" fill="#b0b8c8" stroke="#445566" stroke-width="2"/>
+<rect x="274" y="500" width="52" height="32" rx="3" fill="rgba(255,255,255,.88)"/>
+<text x="300" y="520" text-anchor="middle" font-size="25" font-weight="bold" fill="#334455">DEM</text>
+<line x1="300" y1="480" x2="300" y2="446" stroke="#cc2200" stroke-width="4" class="sf"/>
+<line x1="300" y1="446" x2="420" y2="446" stroke="#cc2200" stroke-width="4" class="sf"/>
+<line x1="420" y1="446" x2="420" y2="640" stroke="#cc2200" stroke-width="4" class="sf" marker-end="url(#as)"/>
+
+
+<!-- TURBINE T-103 -->
+<line x1="580" y1="640" x2="580" y2="680" stroke="#cc2200" stroke-width="4" class="sf" marker-end="url(#as)"/>
+<polygon points="504,680 656,680 680,770 480,770" fill="url(#gt)" stroke="#445566" stroke-width="3"/>
+<ellipse cx="580" cy="725" rx="16" ry="16" fill="#fff" stroke="#445566" stroke-width="2.5"/>
+<rect x="510" y="730" width="140" height="36" rx="4" fill="rgba(255,255,255,.92)"/>
+<text x="580" y="749" text-anchor="middle" font-size="25" font-weight="bold" fill="#334455">TURBINE</text>
+<text x="580" y="764" text-anchor="middle" font-size="20" fill="#556677">2.5 MW</text>
+<rect x="494" y="658" width="172" height="22" rx="4" fill="#fffaea"/>
+<text x="580" y="673" text-anchor="middle" font-size="20" fill="#886600">CONDENSING TURBINE 1</text>
+<line x1="580" y1="770" x2="580" y2="816" stroke="#0044aa" stroke-width="3.5" class="bf" marker-end="url(#ac)"/>
+<rect x="496" y="816" width="168" height="38" rx="5" fill="#c8d8f0" stroke="#334499" stroke-width="2"/>
+<rect x="502" y="818" width="156" height="18" rx="3" fill="rgba(255,255,255,.92)"/>
+<text x="578" y="834" text-anchor="middle" font-size="20" font-weight="bold" fill="#223388">CONDENSOR</text>
+<text x="580" y="847" text-anchor="middle" font-size="13" fill="#334499">Air-Cooled</text>
+<path d="M496,854 Q580,872 664,854 L652,906 Q580,892 508,906 Z" fill="#c8e4d8" stroke="#336655" stroke-width="2"/>
+<rect x="536" y="866" width="88" height="30" rx="3" fill="rgba(255,255,255,.88)"/>
+<text x="580" y="883" text-anchor="middle" font-size="23" font-weight="bold" fill="#225544">CT</text>
+<text x="580" y="896" text-anchor="middle" font-size="13" fill="#336655">COOLING TOWER</text>
+<line x1="680" y1="725" x2="714" y2="725" stroke="#8898aa" stroke-width="6"/>
+<ellipse cx="748" cy="725" rx="38" ry="22" fill="url(#gg)" stroke="#886600" stroke-width="3"/>
+<rect x="720" y="714" width="56" height="22" rx="3" fill="rgba(255,255,255,.82)"/>
+<text x="748" y="729" text-anchor="middle" font-size="20" font-weight="bold" fill="#554400">GEN</text>
+<line x1="748" y1="747" x2="748" y2="770" stroke="#cc4400" stroke-width="3.5"/>
+<rect x="718" y="770" width="60" height="42" rx="4" fill="url(#gtr)" stroke="#336633" stroke-width="2"/>
+<circle cx="736" cy="791" r="14" fill="none" stroke="#336633" stroke-width="3"/>
+<circle cx="760" cy="791" r="14" fill="none" stroke="#336633" stroke-width="3"/>
+<rect x="721" y="780" width="54" height="28" rx="3" fill="rgba(255,255,255,.88)"/>
+<text x="748" y="800" text-anchor="middle" font-size="24" font-weight="bold" fill="#226622">GSU</text>
+<line x1="800" y1="800" x2="800" y2="250" stroke="#1a1a88" stroke-width="3" class="ef" marker-end="url(#ae)"/>
+<line x1="800" y1="800" x2="780" y2="800" stroke="#1a1a88" stroke-width="3" class="ef"/>
+<circle cx="748" cy="250" r="7" fill="#1a1a88"/>
+
+<!-- TURBINE T-104 -->
+<line x1="920" y1="640" x2="920" y2="680" stroke="#cc2200" stroke-width="4" class="sf" marker-end="url(#as)"/>
+<polygon points="844,680 996,680 1020,770 820,770" fill="url(#gt)" stroke="#445566" stroke-width="3"/>
+<ellipse cx="920" cy="725" rx="16" ry="16" fill="#fff" stroke="#445566" stroke-width="2.5"/>
+<rect x="850" y="730" width="140" height="36" rx="4" fill="rgba(255,255,255,.92)"/>
+<text x="920" y="749" text-anchor="middle" font-size="25" font-weight="bold" fill="#334455">TURBINE</text>
+<text x="920" y="764" text-anchor="middle" font-size="20" fill="#556677">2.5 MW</text>
+<rect x="834" y="658" width="172" height="22" rx="4" fill="#fffaea"/>
+<text x="920" y="673" text-anchor="middle" font-size="20" fill="#886600">CONDENSING TURBINE 2</text>
+<line x1="920" y1="770" x2="920" y2="816" stroke="#0044aa" stroke-width="3.5" class="bf" marker-end="url(#ac)"/>
+<rect x="836" y="816" width="168" height="38" rx="5" fill="#c8d8f0" stroke="#334499" stroke-width="2"/>
+<rect x="842" y="818" width="156" height="18" rx="3" fill="rgba(255,255,255,.92)"/>
+<text x="920" y="834" text-anchor="middle" font-size="20" font-weight="bold" fill="#223388">CONDENSER</text>
+<text x="920" y="847" text-anchor="middle" font-size="13" fill="#334499">Air-Cooled</text>
+<path d="M836,854 Q920,872 1004,854 L992,906 Q920,892 848,906 Z" fill="#c8e4d8" stroke="#336655" stroke-width="2"/>
+<rect x="876" y="866" width="88" height="30" rx="3" fill="rgba(255,255,255,.88)"/>
+<text x="920" y="884" text-anchor="middle" font-size="25" font-weight="bold" fill="#225544">CT</text>
+<text x="920" y="896" text-anchor="middle" font-size="13" fill="#336655">COOLING TOWER</text>
+<line x1="1020" y1="725" x2="1054" y2="725" stroke="#8898aa" stroke-width="6"/>
+<ellipse cx="1088" cy="725" rx="38" ry="22" fill="url(#gg)" stroke="#886600" stroke-width="3"/>
+<rect x="1060" y="714" width="56" height="22" rx="3" fill="rgba(255,255,255,.82)"/>
+<text x="1088" y="729" text-anchor="middle" font-size="20" font-weight="bold" fill="#554400">GEN</text>
+<line x1="1088" y1="747" x2="1088" y2="770" stroke="#cc4400" stroke-width="3.5"/>
+<rect x="1058" y="770" width="60" height="42" rx="4" fill="url(#gtr)" stroke="#336633" stroke-width="2"/>
+<circle cx="1076" cy="791" r="14" fill="none" stroke="#336633" stroke-width="3"/>
+<circle cx="1100" cy="791" r="14" fill="none" stroke="#336633" stroke-width="3"/>
+<rect x="1061" y="780" width="54" height="28" rx="3" fill="rgba(255,255,255,.88)"/>
+<text x="1088" y="800" text-anchor="middle" font-size="24" font-weight="bold" fill="#226622">GSU</text>
+<line x1="1150" y1="800" x2="1150" y2="250" stroke="#1a1a88" stroke-width="3" class="ef" marker-end="url(#ae)"/>
+<line x1="1110" y1="800" x2="1150" y2="800" stroke="#1a1a88" stroke-width="3" class="ef"/>
+<circle cx="1088" cy="250" r="7" fill="#1a1a88"/>
+
+<!-- TURBINE T-101 BP -->
+<line x1="1280" y1="640" x2="1280" y2="680" stroke="#cc2200" stroke-width="4" class="sf" marker-end="url(#as)"/>
+<polygon points="1204,680 1356,680 1380,770 1180,770" fill="url(#gt)" stroke="#445566" stroke-width="3"/>
+<ellipse cx="1280" cy="725" rx="16" ry="16" fill="#fff" stroke="#445566" stroke-width="2.5"/>
+<rect x="1210" y="730" width="140" height="36" rx="4" fill="rgba(255,255,255,.92)"/>
+<text x="1280" y="749" text-anchor="middle" font-size="25" font-weight="bold" fill="#334455">TURBINE BP</text>
+<text x="1280" y="764" text-anchor="middle" font-size="20" fill="#556677">2.5 MW</text>
+<rect x="1194" y="658" width="172" height="22" rx="4" fill="#fffaea"/>
+<text x="1280" y="673" text-anchor="middle" font-size="20" fill="#886600">BACK PRESSURE 1</text>
+<line x1="1280" y1="770" x2="1280" y2="836" stroke="#cc2200" stroke-width="3.5" stroke-dasharray="14 5" class="sf" marker-end="url(#as)"/>
+<line x1="1380" y1="725" x2="1414" y2="725" stroke="#8898aa" stroke-width="6"/>
+<ellipse cx="1448" cy="725" rx="38" ry="22" fill="url(#gg)" stroke="#886600" stroke-width="3"/>
+<rect x="1420" y="714" width="56" height="22" rx="3" fill="rgba(255,255,255,.82)"/>
+<text x="1448" y="729" text-anchor="middle" font-size="20" font-weight="bold" fill="#554400">GEN</text>
+<line x1="1448" y1="747" x2="1448" y2="770" stroke="#cc4400" stroke-width="3.5"/>
+<rect x="1418" y="770" width="60" height="42" rx="4" fill="url(#gtr)" stroke="#336633" stroke-width="2"/>
+<circle cx="1436" cy="791" r="14" fill="none" stroke="#336633" stroke-width="3"/>
+<circle cx="1460" cy="791" r="14" fill="none" stroke="#336633" stroke-width="3"/>
+<rect x="1421" y="780" width="54" height="28" rx="3" fill="rgba(255,255,255,.88)"/>
+<text x="1448" y="800" text-anchor="middle" font-size="24" font-weight="bold" fill="#226622">GSU</text>
+<line x1="1500" y1="800" x2="1500" y2="250" stroke="#1a1a88" stroke-width="3" class="ef" marker-end="url(#ae)"/>
+<line x1="1475" y1="800" x2="1500" y2="800" stroke="#1a1a88" stroke-width="3" class="ef"/>
+<circle cx="1448" cy="250" r="7" fill="#1a1a88"/>
+
+<!-- TURBINE T-102 BP -->
+<line x1="1620" y1="640" x2="1620" y2="680" stroke="#cc2200" stroke-width="4" class="sf" marker-end="url(#as)"/>
+<polygon points="1544,680 1696,680 1720,770 1520,770" fill="url(#gt)" stroke="#445566" stroke-width="3"/>
+<ellipse cx="1620" cy="725" rx="16" ry="16" fill="#fff" stroke="#445566" stroke-width="2.5"/>
+<rect x="1550" y="730" width="140" height="36" rx="4" fill="rgba(255,255,255,.92)"/>
+<text x="1620" y="749" text-anchor="middle" font-size="25" font-weight="bold" fill="#334455">TURBINE BP</text>
+<text x="1620" y="764" text-anchor="middle" font-size="20" fill="#556677">2.5 MW</text>
+<rect x="1534" y="658" width="172" height="22" rx="4" fill="#fffaea"/>
+<text x="1620" y="673" text-anchor="middle" font-size="20" fill="#886600">BACK PRESSURE 2</text>
+<line x1="1620" y1="770" x2="1620" y2="836" stroke="#cc2200" stroke-width="3.5" stroke-dasharray="14 5" class="sf" marker-end="url(#as)"/>
+<line x1="1720" y1="725" x2="1754" y2="725" stroke="#8898aa" stroke-width="6"/>
+<ellipse cx="1788" cy="725" rx="38" ry="22" fill="url(#gg)" stroke="#886600" stroke-width="3"/>
+<rect x="1760" y="714" width="56" height="22" rx="3" fill="rgba(255,255,255,.82)"/>
+<text x="1788" y="729" text-anchor="middle" font-size="20" font-weight="bold" fill="#554400">GEN</text>
+<line x1="1788" y1="747" x2="1788" y2="770" stroke="#cc4400" stroke-width="3.5"/>
+<rect x="1758" y="770" width="60" height="42" rx="4" fill="url(#gtr)" stroke="#336633" stroke-width="2"/>
+<circle cx="1776" cy="791" r="14" fill="none" stroke="#336633" stroke-width="3"/>
+<circle cx="1800" cy="791" r="14" fill="none" stroke="#336633" stroke-width="3"/>
+<rect x="1761" y="780" width="54" height="28" rx="3" fill="rgba(255,255,255,.88)"/>
+<text x="1788" y="800" text-anchor="middle" font-size="20" font-weight="bold" fill="#226622">GSU</text>
+<line x1="1840" y1="800" x2="1840" y2="250" stroke="#1a1a88" stroke-width="3" class="ef" marker-end="url(#ae)"/>
+<line x1="1845" y1="800" x2="1824" y2="800" stroke="#1a1a88" stroke-width="3" class="ef"/>
+<circle cx="1788" cy="250" r="7" fill="#1a1a88"/>
+<!-- EXHAUST STEAM HEADER BP → SSE -->
+<line x1="1280" y1="836" x2="1280" y2="860" stroke="#cc2200" stroke-width="3.5"/>
+<line x1="1620" y1="836" x2="1620" y2="860" stroke="#cc2200" stroke-width="3.5"/>
+<line x1="1280" y1="860" x2="1610" y2="860" stroke="#cc2200" stroke-width="3.5" stroke-dasharray="16 6" class="sfr"/>
+<rect x="1300" y="838" width="440" height="22" rx="4" fill="rgba(255,255,255,.98)"/>
+<text x="1520" y="854" text-anchor="middle" font-size="25" font-weight="bold" fill="#cc2200">EXHAUST STEAM HEADER (BP → DI-SSE)</text>
+
+<!--  SUBSYSTEM -->
+<line x1="1470" y1="860" x2="1470" y2="900" stroke="#cc2200" stroke-width="3.5" stroke-dasharray="12 5" class="sf" marker-end="url(#as)"/>
+<rect x="1410" y="1020" width="132" height="92" rx="10" fill="#c0d8f8" stroke="#1a5fc4" stroke-width="2.5"/>
+<g stroke="#3366aa" stroke-width="1.5">
+</g>
+<text x="1478" y="1080" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a3a7a">SSE</text>
+<text x="1478" y="1100" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a3a7a">CONDENSOR</text>
+<ellipse cx="1470" cy="1170" rx="30" ry="30" fill="#fff" stroke="#1a5fc4" stroke-width="2.5"/>
+<text x="1470" y="1170" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a3a7a">PUMP</text>
+<ellipse cx="1600" cy="1170" rx="30" ry="30" fill="#fff" stroke="#1a5fc4" stroke-width="2.5"/>
+<text x="1600" y="1170" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a3a7a">SINK</text>
+<line x1="1500" y1="1170" x2="1570" y2="1170" stroke="#1a3a7a" stroke-width="3" class="ef" marker-end="url(#ae)"/>
+<text x="1380" y="900" text-anchor="middle" font-size="20" fill="#1a4088">HOT STEAM IN ↓</text>
+<line x1="1900" y1="672" x2="1900" y2="692" stroke="#1a5fc4" stroke-width="3.5"/>
+<polygon points="1540,910 1404,910 1350,975 1600,975" fill="url(#gorc)" stroke="#1a5fc4" stroke-width="2.5"/>
+<ellipse cx="1475" cy="940" rx="16" ry="16" fill="#fff" stroke="#1a5fc4" stroke-width="2.5"/>
+<rect x="1405" y="940" width="145" height="34" rx="4" fill="rgba(255,255,255,.94)"/>
+<text x="1430" y="965" text-anchor="middle" font-size="25" font-weight="bold" fill="#1a3a7a">SSE:</text>
+<text x="1500" y="965" text-anchor="middle" font-size="25" fill="#1a5fc4">3,75 MW</text>
+<circle cx="2072" cy="250" r="7" fill="#1a1a88"/>
+<line x1="1470" y1="978" x2="1470" y2="1020" stroke="#1a3a7a" stroke-width="3" class="ef" marker-end="url(#ae)"/>
+<line x1="1470" y1="1110" x2="1470" y2="1140" stroke="#1a3a7a" stroke-width="3" class="ef" marker-end="url(#ae)"/>
+<g stroke="#3366aa" stroke-width="1.5">
+
+</g>
+
+
+<!-- PROD WELL EXP-01 -->
+<rect x="2386" y="1212" width="28" height="160" fill="#5a8855"/>
+<rect x="2390" y="1212" width="20" height="160" fill="#7aaa77"/>
+<rect x="2390" y="1360" width="20" height="100" fill="#c87040" opacity="0.9"/>
+<rect x="2372" y="1190" width="56" height="28" rx="5" fill="#7aaa77" stroke="#336633" stroke-width="2.5"/>
+<rect x="2380" y="1166" width="40" height="28" rx="4" fill="#669966" stroke="#336633" stroke-width="2.5"/>
+<line x1="2400" y1="1166" x2="2400" y2="1120" stroke="#336633" stroke-width="7"/>
+<line x1="2374" y1="1145" x2="2426" y2="1145" stroke="#336633" stroke-width="4"/>
+<circle cx="2374" cy="1145" r="10" fill="#44aa44" stroke="#226622" stroke-width="2.5"/>
+<circle cx="2426" cy="1145" r="10" fill="#44aa44" stroke="#226622" stroke-width="2.5"/>
+<rect x="2338" y="1094" width="126" height="26" rx="4" fill="#edfaed" stroke="#1a7a2a" stroke-width="1.5"/>
+<text x="2401" y="1113" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a5a1a">EXP-01</text>
+<rect x="2338" y="1064" width="126" height="26" rx="4" fill="#edfaed" stroke="#1a7a2a" stroke-width="1"/>
+<text x="2401" y="1083" text-anchor="middle" font-size="13" fill="#1a7a2a">PROD WELL (NEW)</text>
+
+<!-- PROD WELL EXP-02 -->
+<rect x="2886" y="1212" width="28" height="160" fill="#5a8855"/>
+<rect x="2890" y="1212" width="20" height="160" fill="#7aaa77"/>
+<rect x="2890" y="1360" width="20" height="100" fill="#c87040" opacity="0.9"/>
+<rect x="2872" y="1190" width="56" height="28" rx="5" fill="#7aaa77" stroke="#336633" stroke-width="2.5"/>
+<rect x="2880" y="1166" width="40" height="28" rx="4" fill="#669966" stroke="#336633" stroke-width="2.5"/>
+<line x1="2900" y1="1166" x2="2900" y2="1120" stroke="#336633" stroke-width="7"/>
+<line x1="2874" y1="1145" x2="2926" y2="1145" stroke="#336633" stroke-width="4"/>
+<circle cx="2874" cy="1145" r="10" fill="#44aa44" stroke="#226622" stroke-width="2.5"/>
+<circle cx="2926" cy="1145" r="10" fill="#44aa44" stroke="#226622" stroke-width="2.5"/>
+<rect x="2838" y="1094" width="126" height="26" rx="4" fill="#edfaed" stroke="#1a7a2a" stroke-width="1.5"/>
+<text x="2901" y="1113" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a5a1a">EXP-02</text>
+<rect x="2838" y="1064" width="126" height="26" rx="4" fill="#edfaed" stroke="#1a7a2a" stroke-width="1"/>
+<text x="2901" y="1083" text-anchor="middle" font-size="13" fill="#1a7a2a">PROD WELL (NEW)</text>
+
+<!-- REINJ WELL EXP-INJ-01 -->
+<rect x="3306" y="1212" width="28" height="160" fill="#556688"/>
+<rect x="3310" y="1212" width="20" height="160" fill="#7788aa"/>
+<rect x="3310" y="1360" width="20" height="80" fill="#447799" opacity="0.8"/>
+<rect x="3292" y="1190" width="56" height="28" rx="5" fill="#7788aa" stroke="#334488" stroke-width="2.5"/>
+<rect x="3300" y="1166" width="40" height="28" rx="4" fill="#667799" stroke="#334488" stroke-width="2.5"/>
+<line x1="3320" y1="1166" x2="3320" y2="1120" stroke="#334488" stroke-width="7"/>
+<line x1="3294" y1="1145" x2="3346" y2="1145" stroke="#334488" stroke-width="4"/>
+<circle cx="3294" cy="1145" r="10" fill="#4488cc" stroke="#224488" stroke-width="2.5"/>
+<circle cx="3346" cy="1145" r="10" fill="#4488cc" stroke="#224488" stroke-width="2.5"/>
+<rect x="3258" y="1094" width="126" height="26" rx="4" fill="#eef4ff" stroke="#334488" stroke-width="1.5"/>
+<text x="3321" y="1113" text-anchor="middle" font-size="14" font-weight="bold" fill="#223388">EXP-INJ-01</text>
+<rect x="3258" y="1064" width="126" height="26" rx="4" fill="#eef4ff" stroke="#334488" stroke-width="1"/>
+<text x="3321" y="1083" text-anchor="middle" font-size="13" fill="#334488">REINJ WELL (NEW)</text>
+
+<!-- GATHERING HEADER + V-201 -->
+<line x1="2400" y1="1120" x2="2400" y2="1040" stroke="#1a7a2a" stroke-width="4.5" class="xf" marker-end="url(#ax)"/>
+<line x1="2900" y1="1120" x2="2900" y2="1040" stroke="#1a7a2a" stroke-width="4.5" class="xf" marker-end="url(#ax)"/>
+<line x1="2400" y1="1040" x2="2900" y2="1040" stroke="#1a7a2a" stroke-width="4.5"/>
+<line x1="2650" y1="1040" x2="2650" y2="970" stroke="#1a7a2a" stroke-width="4.5" class="xf" marker-end="url(#ax)"/>
+<rect x="2396" y="1018" width="468" height="22" rx="4" fill="rgba(255,255,255,.95)"/>
+<text x="2640" y="1035" text-anchor="middle" font-size="14" fill="#1a7a2a" font-weight="bold">GATHERING HEADER (STEAM + BRINE)</text>
+<rect x="2604" y="820" width="92" height="150" rx="18" fill="url(#gv)" stroke="#336633" stroke-width="3"/>
+<ellipse cx="2650" cy="820" rx="46" ry="16" fill="#a0c0a0" stroke="#336633" stroke-width="2.5"/>
+<polygon points="2604,970 2622,1004 2678,1004 2696,970" fill="#909a90" stroke="#336633" stroke-width="2"/>
+<path d="M2650 840 Q2628 864 2650 882 Q2672 898 2650 916" fill="none" stroke="rgba(50,120,50,.3)" stroke-width="3.5"/>
+<rect x="2614" y="882" width="72" height="42" rx="3" fill="rgba(255,255,255,.9)"/>
+<text x="2650" y="900" text-anchor="middle" font-size="14" font-weight="bold" fill="#224422">SEP V-201</text>
+<text x="2650" y="916" text-anchor="middle" font-size="12" fill="#336633">8 bar | 175°C</text>
+<text x="2650" y="930" text-anchor="middle" font-size="11" fill="#336633">300 t/h</text>
+<line x1="2650" y1="820" x2="2650" y2="756" stroke="#1a7a2a" stroke-width="4" class="xf"/>
+<line x1="2696" y1="900" x2="2830" y2="900" stroke="#7a3a0a" stroke-width="3.5" class="bf" marker-end="url(#ab)"/>
+<line x1="2650" y1="756" x2="2400" y2="756" stroke="#1a7a2a" stroke-width="4" class="xf"/>
+<line x1="2650" y1="756" x2="2900" y2="756" stroke="#1a7a2a" stroke-width="4" class="xf"/>
+<rect x="2384" y="730" width="536" height="24" rx="4" fill="#ecfaec"/>
+<text x="2652" y="748" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a6a1a">NEW STEAM HEADER (EXPANSION)</text>
+<rect x="2830" y="877" width="120" height="62" rx="6" fill="#d4c8a8" stroke="#7a6030" stroke-width="2.5"/>
+<rect x="2836" y="879" width="108" height="24" rx="3" fill="rgba(255,255,255,.88)"/>
+<text x="2890" y="895" text-anchor="middle" font-size="15" font-weight="bold" fill="#5a4010">F-201</text>
+<text x="2890" y="926" text-anchor="middle" font-size="13" fill="#7a6030">FLASH TANK</text>
+<line x1="2950" y1="900" x2="3100" y2="900" stroke="#7a3a0a" stroke-width="3.5" class="bf"/>
+<line x1="3100" y1="900" x2="3100" y2="1040" stroke="#7a3a0a" stroke-width="3.5" class="bf"/>
+<line x1="3100" y1="1040" x2="3320" y2="1040" stroke="#7a3a0a" stroke-width="3.5" class="bf"/>
+<line x1="3320" y1="1040" x2="3320" y2="1120" stroke="#7a3a0a" stroke-width="3.5" class="bf" marker-end="url(#ab)"/>
+
+<!-- TURBINE A T-301 -->
+<line x1="2400" y1="756" x2="2400" y2="660" stroke="#1a7a2a" stroke-width="4" class="xf" marker-end="url(#ax)"/>
+<polygon points="2300,520 2500,520 2530,640 2270,640" fill="url(#gt)" stroke="#336633" stroke-width="3.5"/>
+<ellipse cx="2400" cy="580" rx="20" ry="20" fill="#fff" stroke="#336633" stroke-width="3"/>
+<rect x="2310" y="590" width="180" height="44" rx="5" fill="rgba(255,255,255,.94)"/>
+<text x="2400" y="610" text-anchor="middle" font-size="18" font-weight="bold" fill="#224422">T-301 COND</text>
+<text x="2400" y="628" text-anchor="middle" font-size="16" fill="#336633">10 MW</text>
+<rect x="2292" y="498" width="216" height="24" rx="5" fill="#ecfaec"/>
+<text x="2400" y="515" text-anchor="middle" font-size="17" font-weight="bold" fill="#1a6a1a">TURBINE A</text>
+<line x1="2400" y1="640" x2="2400" y2="690" stroke="#0044aa" stroke-width="3.5" class="bf" marker-end="url(#ac)"/>
+<rect x="2290" y="690" width="220" height="46" rx="6" fill="#c8d8f0" stroke="#334499" stroke-width="2.5"/>
+<rect x="2296" y="692" width="208" height="20" rx="4" fill="rgba(255,255,255,.94)"/>
+<text x="2400" y="706" text-anchor="middle" font-size="16" font-weight="bold" fill="#223388">E-301 CONDENSER</text>
+<text x="2400" y="724" text-anchor="middle" font-size="14" fill="#334499">Air-Cooled</text>
+<path d="M2290,736 Q2400,760 2510,736 L2494,798 Q2400,780 2306,798 Z" fill="#c8e4d8" stroke="#336655" stroke-width="2.5"/>
+<rect x="2344" y="750" width="112" height="36" rx="4" fill="rgba(255,255,255,.9)"/>
+<text x="2400" y="768" text-anchor="middle" font-size="16" font-weight="bold" fill="#225544">CT-301</text>
+<text x="2400" y="785" text-anchor="middle" font-size="14" fill="#336655">COOL. TOWER A</text>
+<line x1="2530" y1="580" x2="2576" y2="580" stroke="#8898aa" stroke-width="7"/>
+<ellipse cx="2626" cy="580" rx="50" ry="30" fill="url(#gg)" stroke="#886600" stroke-width="3.5"/>
+<rect x="2590" y="566" width="72" height="28" rx="4" fill="rgba(255,255,255,.84)"/>
+<text x="2626" y="585" text-anchor="middle" font-size="18" font-weight="bold" fill="#554400">GEN-A</text>
+<line x1="2626" y1="610" x2="2626" y2="638" stroke="#cc4400" stroke-width="4"/>
+<rect x="2590" y="638" width="72" height="52" rx="4" fill="url(#gtr)" stroke="#336633" stroke-width="2.5"/>
+<circle cx="2610" cy="664" r="18" fill="none" stroke="#336633" stroke-width="3.5"/>
+<circle cx="2642" cy="664" r="18" fill="none" stroke="#336633" stroke-width="3.5"/>
+<rect x="2593" y="638" width="66" height="20" rx="3" fill="rgba(255,255,255,.9)"/>
+<text x="2626" y="654" text-anchor="middle" font-size="15" font-weight="bold" fill="#226622">GSU-A</text>
+<line x1="2626" y1="690" x2="2626" y2="250" stroke="#1a1a88" stroke-width="3.5" class="ef" marker-end="url(#ae)"/>
+<circle cx="2626" cy="250" r="8" fill="#1a1a88"/>
+
+<!-- TURBINE B T-302 -->
+<line x1="2900" y1="756" x2="2900" y2="660" stroke="#1a7a2a" stroke-width="4" class="xf" marker-end="url(#ax)"/>
+<polygon points="2800,520 3000,520 3030,640 2770,640" fill="url(#gt)" stroke="#336633" stroke-width="3.5"/>
+<ellipse cx="2900" cy="580" rx="20" ry="20" fill="#fff" stroke="#336633" stroke-width="3"/>
+<rect x="2810" y="590" width="180" height="44" rx="5" fill="rgba(255,255,255,.94)"/>
+<text x="2900" y="610" text-anchor="middle" font-size="18" font-weight="bold" fill="#224422">T-302 COND</text>
+<text x="2900" y="628" text-anchor="middle" font-size="16" fill="#336633">10 MW</text>
+<rect x="2792" y="498" width="216" height="24" rx="5" fill="#ecfaec"/>
+<text x="2900" y="515" text-anchor="middle" font-size="17" font-weight="bold" fill="#1a6a1a">TURBINE B</text>
+<line x1="2900" y1="640" x2="2900" y2="690" stroke="#0044aa" stroke-width="3.5" class="bf" marker-end="url(#ac)"/>
+<rect x="2790" y="690" width="220" height="46" rx="6" fill="#c8d8f0" stroke="#334499" stroke-width="2.5"/>
+<rect x="2796" y="692" width="208" height="20" rx="4" fill="rgba(255,255,255,.94)"/>
+<text x="2900" y="706" text-anchor="middle" font-size="16" font-weight="bold" fill="#223388">E-302 CONDENSER</text>
+<text x="2900" y="724" text-anchor="middle" font-size="14" fill="#334499">Air-Cooled</text>
+<path d="M2790,736 Q2900,760 3010,736 L2994,798 Q2900,780 2806,798 Z" fill="#c8e4d8" stroke="#336655" stroke-width="2.5"/>
+<rect x="2844" y="750" width="112" height="36" rx="4" fill="rgba(255,255,255,.9)"/>
+<text x="2900" y="768" text-anchor="middle" font-size="16" font-weight="bold" fill="#225544">CT-302</text>
+<text x="2900" y="785" text-anchor="middle" font-size="14" fill="#336655">COOL. TOWER B</text>
+<line x1="3030" y1="580" x2="3076" y2="580" stroke="#8898aa" stroke-width="7"/>
+<ellipse cx="3126" cy="580" rx="50" ry="30" fill="url(#gg)" stroke="#886600" stroke-width="3.5"/>
+<rect x="3090" y="566" width="72" height="28" rx="4" fill="rgba(255,255,255,.84)"/>
+<text x="3126" y="585" text-anchor="middle" font-size="18" font-weight="bold" fill="#554400">GEN-B</text>
+<line x1="3126" y1="610" x2="3126" y2="638" stroke="#cc4400" stroke-width="4"/>
+<rect x="3090" y="638" width="72" height="52" rx="4" fill="url(#gtr)" stroke="#336633" stroke-width="2.5"/>
+<circle cx="3110" cy="664" r="18" fill="none" stroke="#336633" stroke-width="3.5"/>
+<circle cx="3142" cy="664" r="18" fill="none" stroke="#336633" stroke-width="3.5"/>
+<rect x="3093" y="638" width="66" height="20" rx="3" fill="rgba(255,255,255,.9)"/>
+<text x="3126" y="654" text-anchor="middle" font-size="15" font-weight="bold" fill="#226622">GSU-B</text>
+<line x1="3126" y1="690" x2="3126" y2="250" stroke="#1a1a88" stroke-width="3.5" class="ef" marker-end="url(#ae)"/>
+<circle cx="3126" cy="250" r="8" fill="#1a1a88"/>
+
+<!-- SWITCHYARD -->
+<rect x="580" y="236" width="2680" height="34" rx="5" fill="#202060" stroke="#999999" stroke-width="3"/>
+<text x="1480" y="260" text-anchor="middle" font-size="25" font-weight="bold" fill="#999999">━━━ SWITCHYARD ━━━</text>
+<rect x="584" y="238" width="120" height="30" rx="3" fill="#999999" opacity="0.6"/>
+<text x="644" y="259" text-anchor="middle" font-size="12" fill="#aabbff">TO PLN GRID</text>
+<rect x="3138" y="238" width="120" height="30" rx="3" fill="#999999" opacity="0.6"/>
+<text x="3198" y="259" text-anchor="middle" font-size="12" fill="#aabbff">TO PLN GRID</text>
+
+<!-- CAPACITY SUMMARY -->
+<rect x="3280" y="400" width="280" height="200" rx="10" fill="#0e1c38" stroke="#3a78bb" stroke-width="2.5"/>
+<text x="3420" y="428" text-anchor="middle" font-size="23" font-weight="bold" fill="#6fc8ff" font-family="'Rajdhani',sans-serif" letter-spacing="1">KAPASITAS TOTAL</text>
+<line x1="3290" y1="436" x2="3550" y2="436" stroke="#3a78bb" stroke-width="1.5"/>
+<text x="3295" y="462" font-size="18" fill="#cce8ff" font-family="'Share Tech Mono',monospace">Existing CT ×2 : 5.0 MW</text>
+<text x="3295" y="482" font-size="18" fill="#cce8ff" font-family="'Share Tech Mono',monospace">BP Units ×2   : 5.0 MW</text>
+<text x="3295" y="502" font-size="18" fill="#cce8ff" font-family="'Share Tech Mono',monospace">SSE Unit  ×1  : 3.75 MW</text>
+<text x="3295" y="522" font-size="18" fill="#cce8ff" font-family="'Share Tech Mono',monospace">Expansion ×2  :20.0 MW</text>
+<line x1="3290" y1="535" x2="3550" y2="535" stroke="#3a78bb" stroke-width="1.5"/>
+<text x="3295" y="557" font-size="25" font-weight="bold" fill="#ffe890" font-family="'Rajdhani',sans-serif">TOTAL  : 33,75 MW</text>
+<text x="3295" y="580" font-size="20" fill="#88aacc" font-family="'Share Tech Mono',monospace">Potensi: ~56 MWe</text>
+
+<!-- HOVER TOOLTIPS -->
+<rect x="248" y="1060" width="110" height="155" fill="transparent" class="tip" data-tip="Production Well ULB-02" data-info="Existing | Depth: ≈2200 m | T: 260°C | P: 32 bar | Flow: 80 t/h | OPERATING"/>
+<rect x="250" y="696" width="100" height="215" fill="transparent" class="tip" data-tip="Separator V-101" data-info="Vertical Cyclone Sep | P: 7.5 bar | T: 170°C | Steam quality: 0.35 | Cap: 100 t/h"/>
+<rect x="104" y="714" width="92" height="220" fill="transparent" class="tip" data-tip="Rock Muffler RM-101" data-info="Rock silencer for well blowdown | Silica rock fill | Reduces noise &amp; venting impact"/>
+<rect x="262" y="578" width="76" height="76" fill="transparent" class="tip" data-tip="Scrubber SCB-101" data-info="Moisture separator | Removes liquid droplets from steam before turbines"/>
+<rect x="262" y="468" width="76" height="80" fill="transparent" class="tip" data-tip="Demister DEM-101" data-info="Mist eliminator | Final moisture removal | Mesh pad type"/>
+<rect x="490" y="672" width="180" height="100" fill="transparent" class="tip" data-tip="Turbine T-103 (Condensing)" data-info="Condensing ST | 2.5 MW | Inlet: 7.5 bar 170°C | Exhaust: 0.1 bar | OPERATING"/>
+<rect x="830" y="672" width="180" height="100" fill="transparent" class="tip" data-tip="Turbine T-104 (Condensing)" data-info="Condensing ST | 2.5 MW | Inlet: 7.5 bar 170°C | Exhaust: 0.1 bar | OPERATING"/>
+<rect x="1190" y="672" width="180" height="100" fill="transparent" class="tip" data-tip="Turbine T-101 (Back Pressure)" data-info="BP ST | 2.5 MW | Inlet: 7.5 bar 170°C | Exhaust 2 bar → ORC | OPERATING"/>
+<rect x="1530" y="672" width="180" height="100" fill="transparent" class="tip" data-tip="Turbine T-102 (Back Pressure)" data-info="BP ST | 2.5 MW | Inlet: 7.5 bar 170°C | Exhaust 2 bar → ORC | OPERATING"/>
+<rect x="1828" y="574" width="144" height="100" fill="transparent" class="tip" data-tip="ORC Evaporator HX-201" data-info="Shell &amp; Tube HX | Hot: exhaust steam 130°C | Cold: Isobutane | Duty: 8 MW"/>
+<rect x="1796" y="684" width="208" height="95" fill="transparent" class="tip" data-tip="ORC Turbine T-201" data-info="ORC Radial Turbine | Fluid: Isobutane (R-600a) | 2.5 MW | Inlet: 110°C | PROPOSED"/>
+<rect x="2358" y="1060" width="130" height="155" fill="transparent" class="tip" data-tip="New Production Well EXP-01" data-info="PROPOSED | Target depth: 2500 m | Est. T: 265°C | Est. flow: 100 t/h"/>
+<rect x="2858" y="1060" width="130" height="155" fill="transparent" class="tip" data-tip="New Production Well EXP-02" data-info="PROPOSED | Target depth: 2500 m | Est. T: 265°C | Est. flow: 100 t/h"/>
+<rect x="3284" y="1060" width="74" height="155" fill="transparent" class="tip" data-tip="New Reinjection Well EXP-INJ-01" data-info="PROPOSED | Depth: 2000 m | Flow: 200 t/h | Dual-well reinj system"/>
+<rect x="2596" y="810" width="110" height="200" fill="transparent" class="tip" data-tip="New Separator V-201" data-info="New Vertical Cyclone Sep | P: 8 bar | T: 175°C | Capacity: 300 t/h | PROPOSED"/>
+<rect x="2270" y="510" width="268" height="300" fill="transparent" class="tip" data-tip="Expansion Turbine A – T-301" data-info="Condensing ST | 10 MW | Inlet: 8 bar 175°C | Air-Cooled Cond | PROPOSED"/>
+<rect x="2770" y="510" width="268" height="300" fill="transparent" class="tip" data-tip="Expansion Turbine B – T-302" data-info="Condensing ST | 10 MW | Inlet: 8 bar 175°C | Air-Cooled Cond | PROPOSED"/>
+
+</svg>
+</div>
+
+<!-- LEGEND -->
+<div class="leg">
+  <span class="lt">LEGENDA</span>
+  <div class="lg">
+    <div class="li"><div class="lr" style="background:#fffaee;border-color:#c9a000;"></div>Existing (Condensing)</div>
+    <div class="li"><div class="lr" style="background:#eaf4ff;border-color:#1a5fc4;"></div>BP + ORC</div>
+    <div class="li"><div class="lr" style="background:#ecfaec;border-color:#1a7a2a;"></div>Field Expansion</div>
+  </div>
+  <div class="ls"></div>
+  <div class="lg">
+    <div class="li"><div class="ll" style="background:#cc2200;"></div>Steam HP</div>
+    <div class="li"><div class="ll" style="background:#cc2200;opacity:.5;"></div>Exhaust Steam</div>
+    <div class="li"><div class="ll" style="background:#7a3a0a;"></div>Brine/Condensate</div>
+    <div class="li"><div class="ll" style="background:#0044aa;"></div>Condensate Return</div>
+    <div class="li"><div class="ll" style="background:#1a5fc4;"></div>ORC Working Fluid</div>
+    <div class="li"><div class="ll" style="background:#1a7a2a;"></div>New Steam (Expansion)</div>
+    <div class="li"><div class="ll" style="background:#1a1a88;"></div>Electrical HV</div>
+  </div>
+  <div class="ls"></div>
+  <div class="lg" style="font-size:13px;color:#4a5568;">
+    <span style="color:#c89020;font-weight:bold;">●</span>&nbsp;Generator&nbsp;&nbsp;
+    <span style="color:#8898a4;font-weight:bold;">▼</span>&nbsp;Turbine&nbsp;&nbsp;
+    <span style="color:#336633;font-weight:bold;">◑</span>&nbsp;GSU Transformer&nbsp;&nbsp;
+    <span style="color:#336655;font-weight:bold;">⌂</span>&nbsp;Cooling Tower&nbsp;&nbsp;
+    <span style="color:#334499;font-weight:bold;">▬</span>&nbsp;Condenser/HX&nbsp;&nbsp;
+    <span style="color:#7a8299;">◫</span>&nbsp;Separator
+  </div>
+</div>
+
+<div class="ftr">
+  <span>ULB-PFD-001-REV.D · PLTP Ulumbu Development Concept PFD</span>
+  <span>Manggarai Regency, Flores, NTT · 8°36′S 120°29′E</span>
+  <span>Capstone Engineering Project 2026 · For Academic Purposes Only · Not for Construction</span>
+</div>
+</div>
+
+<div id="tip"></div>
+
+<script>
+const tip = document.getElementById('tip');
+document.querySelectorAll('.tip').forEach(el => {
+  el.style.cursor = 'pointer';
+  el.addEventListener('mouseenter', e => {
+    tip.innerHTML = `<strong>${el.dataset.tip}</strong>${el.dataset.info.split('|').join('<br>')}`;
+    tip.style.display = 'block'; mv(e);
+  });
+  el.addEventListener('mousemove', mv);
+  el.addEventListener('mouseleave', () => tip.style.display = 'none');
+});
+function mv(e) {
+  let x = e.clientX+20, y = e.clientY+20;
+  if (x+350 > window.innerWidth)  x = e.clientX-360;
+  if (y+160 > window.innerHeight) y = e.clientY-165;
+  tip.style.left = x+'px'; tip.style.top = y+'px';
+}
+function showSt(m) {
+  const s = document.getElementById('dl-st');
+  s.textContent = m; s.style.display = 'inline'; return s;
+}
+function hideSt(s, d=3000) { setTimeout(() => s.style.display='none', d); }
+
+function svgToCanvas(scale) {
+  return new Promise((resolve, reject) => {
+    const svgEl = document.getElementById('dc');
+    const W = 3600, H = 1490;
+    const serializer = new XMLSerializer();
+    let svgStr = serializer.serializeToString(svgEl);
+    svgStr = svgStr.replace(/class="[^"]*"/g, '');
+    svgStr = svgStr.replace(/style="[^"]*"/, `width="${W}" height="${H}"`);
+    const blob = new Blob([svgStr], {type: 'image/svg+xml;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width  = W * scale;
+      canvas.height = H * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#f4f6fa';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.scale(scale, scale);
+      ctx.drawImage(img, 0, 0, W, H);
+      URL.revokeObjectURL(url);
+      resolve(canvas);
+    };
+    img.onerror = (e) => { URL.revokeObjectURL(url); reject(e); };
+    img.src = url;
+  });
+}
+
+async function dlPNG() {
+  const s = showSt('⏳ Rendering PNG 2× resolusi penuh…');
+  try {
+    const canvas = await svgToCanvas(2);
+    const a = document.createElement('a');
+    a.download = 'PLTP_Ulumbu_PFD_ULB-PFD-001-REV-D.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+    s.textContent = '✅ PNG selesai!'; hideSt(s);
+  } catch(err) {
+    s.textContent = '❌ Error: ' + err.message; hideSt(s,6000);
+  }
+}
+
+async function dlPDF() {
+  const s = showSt('⏳ Membuat PDF A3 landscape…');
+  try {
+    if (!window.jspdf) {
+      await new Promise((res, rej) => {
+        const sc = document.createElement('script');
+        sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+        sc.onload = res; sc.onerror = rej;
+        document.head.appendChild(sc);
+      });
+    }
+    const canvas = await svgToCanvas(2);
+    const imgData = canvas.toDataURL('image/png');
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a3' });
+    const pw = pdf.internal.pageSize.getWidth();
+    const ph = pdf.internal.pageSize.getHeight();
+    pdf.addImage(imgData, 'PNG', 0, 0, pw, ph);
+    pdf.save('PLTP_Ulumbu_PFD_ULB-PFD-001-REV-D.pdf');
+    s.textContent = '✅ PDF A3 selesai!'; hideSt(s);
+  } catch(err) {
+    s.textContent = '❌ Error: ' + err.message; hideSt(s,6000);
+  }
+}
+
+function dlSVG() {
+  const s = showSt('⏳ Menyiapkan SVG…');
+  try {
+    const svgEl = document.getElementById('dc');
+    const ser = new XMLSerializer();
+    let str = ser.serializeToString(svgEl);
+    str = str.replace('<svg ', '<svg xmlns:xlink="http://www.w3.org/1999/xlink" ');
+    const blob = new Blob([str], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.download = 'PLTP_Ulumbu_PFD_ULB-PFD-001-REV-D.svg';
+    a.href = url; a.click(); URL.revokeObjectURL(url);
+    s.textContent = '✅ SVG didownload!'; hideSt(s);
+  } catch(err) { s.textContent = '❌ Error: ' + err.message; hideSt(s,6000); }
+}
+</script>
+</body>
+</html>
